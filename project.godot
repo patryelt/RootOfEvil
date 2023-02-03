@@ -14,6 +14,12 @@ config/name="RootOfEvil"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1440
+window/size/height=2560
+window/handheld/orientation="portrait"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

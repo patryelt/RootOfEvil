@@ -36,16 +36,8 @@ shape = SubResource( 1 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="Area2D"]
-gravity_distance_scale = 0.497
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Area2D"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Area2D/Area2D"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
-
 [node name="RotationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RotatePlane"
 anims/RotatePlane = SubResource( 2 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

@@ -1,3 +1,13 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Planet.tscn" type="PackedScene" id=1]
 
 [node name="Game" type="Node2D"]
+
+[node name="Planet2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 248, 222 )
+rotation_speed = 0.0
+
+[node name="Planet" parent="." instance=ExtResource( 1 )]
+position = Vector2( 226, 515 )
+direction = -1

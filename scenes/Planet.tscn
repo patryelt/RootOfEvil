@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Planet.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/planettexture.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "RotatePlane"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Planet" type="Node2D"]
+script = ExtResource( 1 )
+rotation_speed = 10
+
+[node name="Area2D" type="Area2D" parent="."]
+gravity_distance_scale = 0.497
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="RotationPlayer" type="AnimationPlayer" parent="."]
+anims/RotatePlane = SubResource( 2 )

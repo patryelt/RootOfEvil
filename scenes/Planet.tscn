@@ -10,7 +10,7 @@ radius = 100.0
 resource_name = "RotatePlane"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D:rotation_degrees")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -33,6 +33,16 @@ gravity_distance_scale = 0.497
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Area2D"]
+gravity_distance_scale = 0.497
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D/Area2D"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 

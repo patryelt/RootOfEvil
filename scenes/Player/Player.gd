@@ -15,6 +15,7 @@ func _get_jump_direction():
 func _jump():
 	_jump_direction = _get_jump_direction()
 	_jump_speed = 300 + planet.rotation_speed * 1000
+	planet.leave_planet()
 	planet = null
 	var player_global_position = global_position
 	var player_global_rotation = global_rotation

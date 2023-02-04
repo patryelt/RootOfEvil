@@ -46,6 +46,9 @@ func land(planet):
 	look_at(planet.position)
 	rotate(-PI/2)
 	grow()
+	var game_node = get_parent().get_parent()
+	game_node.spawn_planet()
+	
 	
 func grow():
 	translate(position.normalized() * 200)

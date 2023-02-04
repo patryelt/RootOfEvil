@@ -15,5 +15,8 @@ rotation_speed = 0.19
 direction = -1
 corruption = 1
 
+[node name="Camera2D" type="Camera2D" parent="Planet3"]
+current = true
+
 [node name="Player" parent="Planet3" instance=ExtResource( 1 )]
 position = Vector2( 49, -43 )

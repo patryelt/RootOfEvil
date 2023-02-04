@@ -7,9 +7,6 @@ var _jump_speed = 0
 onready var player_anim = $player_anim
 
 
-func _ready():
-	_planet = get_parent()
-
 func _get_jump_direction():
 	var up_direction = (global_position - _planet.global_position).normalized()
 	return up_direction

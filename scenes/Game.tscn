@@ -1,7 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Planet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Game.gd" type="Script" id=4]
 
@@ -9,19 +7,5 @@
 script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 249, 670 )
 current = true
 script = ExtResource( 3 )
-
-[node name="Planet2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 246, -153 )
-rotation_speed = 0.0
-
-[node name="Planet3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 249, 670 )
-rotation_speed = 0.19
-direction = -1
-corruption = 1
-
-[node name="Player" parent="StartPlanet" instance=ExtResource( 1 )]
-position = Vector2( 0, -398 )

@@ -1,20 +1,24 @@
 extends Node2D
 
 var _planet_scene = preload("res://scenes/Planet.tscn")
+var _player_scene = preload("res://scenes/Player/Player.tscn")
 onready var camera_2d = $Camera2D
 var _planets = []
 var _y_pos = 0
 var _y_planet_space = 1200
 
 func _ready():
-	var start_planet = $StartPlanet
-	var camera = $Camera2D
-	start_planet.camera = camera
-	$StartPlanet/Player.camera = camera
-	camera.target = start_planet
-	_planets.push_back(start_planet)
 	spawn_planet()
 	spawn_planet()
+	spawn_planet()
+	var player = _player_scene.instance()
+	player.camera = camera_2d
+	var start_planet = _planets[0]
+	player._planet = start_planet
+	start_planet.add_child(player)
+	camera_2d.target = start_planet
+	player.translate(Vector2(0,-380))
+	camera_2d.position = start_planet.position
 
 func spawn_planet(offset = 0, shift_world=false):
 	_y_pos += _y_planet_space

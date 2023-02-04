@@ -17,12 +17,11 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[node name="planet" type="Node2D"]
+[node name="PlanetSprite" type="Node2D"]
 
 [node name="planet_anim" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 2
-playing = true
+frame = 1
 
 [node name="planet_animplayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../planet_anim")

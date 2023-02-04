@@ -31,6 +31,8 @@ func spawn_planet(offset = 0, shift_world=false):
 	var new_planet = _planet_scene.instance()
 	new_planet.rotation_speed = 0.4
 	new_planet.camera = camera_2d
+	new_planet.planet_sprite = floor(randf() * 8)
+	new_planet.rotation_speed = randf()
 	add_child(new_planet)
 	var base_position = Vector2(200, -_y_pos)
 	new_planet.position = base_position

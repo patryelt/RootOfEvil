@@ -1,6 +1,6 @@
 extends Node2D
 
-export(float, 0.00, 1.00, 0.01) var rotation_speed = 1
+export(float, 0.00, 1.00, 0.01) var rotation_speed = 1.0
 enum Direction {CLOCKWISE = 1, COUNTERCLOCKWISE = -1}
 export(Direction) var direction
 export(int, 7) var planet_sprite
@@ -26,7 +26,6 @@ func _on_Area2D_area_entered(area):
 		if corruption <= 0:
 			corruption = 1
 			
-			player.planet = self
 			var newpos = player.global_position
 			get_parent().remove_child(player)
 			add_child(player)
@@ -35,8 +34,8 @@ func _on_Area2D_area_entered(area):
 			
 			# new_parent.add_child(self)
 			#set speed to 0?
-			player._jump_speed = 0
 			player.global_position = newpos
+			player.land(self)
 			print ("Planet corruption is ", corruption)
 			
 		

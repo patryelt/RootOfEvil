@@ -4,11 +4,8 @@ var _planet : Node2D
 var camera : Camera2D
 var _jump_direction = Vector2.ZERO
 var _jump_speed = 0
-onready var player_anim = $Area2D/player_anim
+onready var player_anim = $player_anim
 
-
-func _ready():
-	_planet = get_parent()
 
 func _get_jump_direction():
 	var up_direction = (global_position - _planet.global_position).normalized()
@@ -46,6 +43,9 @@ func land(planet):
 	look_at(planet.position)
 	rotate(-PI/2)
 	grow()
+	var game_node = get_parent().get_parent()
+	game_node.spawn_planet()
+	
 	
 func grow():
 	translate(position.normalized() * 200)
@@ -56,4 +56,4 @@ func _process(delta):
 	if _planet == null:
 		position += _jump_direction * delta * _jump_speed
 	if Input.is_action_just_pressed("jump") and _planet:
-		_jump()
+		player_anim.initiate_animation()

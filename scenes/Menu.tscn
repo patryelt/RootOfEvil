@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/game_font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 0.682353, 0.486275, 0.737255, 1 )
+Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+Button/colors/font_color_focus = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/constants/hseparation = 0
+Button/fonts/font = ExtResource( 2 )
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 115.0
+margin_top = 972.0
+margin_right = 236.0
+margin_bottom = 1012.0
+rect_scale = Vector2( 10, 10 )
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+text = "PLAY"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

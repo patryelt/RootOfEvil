@@ -34,29 +34,29 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=29]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 512, 512 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=30]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 512, 0, 512, 512 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=31]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 512, 512, 512 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=32]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 512, 512, 512, 512 )
 
 [sub_resource type="SpriteFrames" id=24]
 animations = [ {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": false,
 "name": "default",
 "speed": 5.0
@@ -150,9 +150,8 @@ animations = [ {
 
 [node name="stem" type="AnimatedSprite" parent="."]
 position = Vector2( 100, -392 )
-scale = Vector2( 1, 1 )
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="eye_burst" type="AnimatedSprite" parent="."]
@@ -166,20 +165,18 @@ playing = true
 position = Vector2( 96, -831 )
 scale = Vector2( 0.818359, 0.818359 )
 frames = SubResource( 8 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="flower_anim" type="AnimatedSprite" parent="."]
 position = Vector2( 77, -18.0001 )
-scale = Vector2( 1, 1 )
 frames = SubResource( 19 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="bulb_anim" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 77, -18.0001 )
-scale = Vector2( 1, 1 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true

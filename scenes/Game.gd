@@ -1,20 +1,51 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var _planet_scene = preload("res://scenes/Planet.tscn")
+var _player_scene = preload("res://scenes/Player/Player.tscn")
+onready var camera_2d = $Camera2D
+onready var score_counter = $Camera2D/ScoreCounter 
+var _planets = []
+var _y_pos = 0
+var _y_planet_space = 1200
+var _x_planet_space = 500
+var _score = 0
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var camera = $Camera2D
-	$Planet2.camera = camera
-	$Planet3.camera = camera
-	$Planet3/Player.camera = camera
-	camera.target = $Planet3
+	spawn_planet()
+	spawn_planet()
+	spawn_planet()
+	_score = 0
+	_update_score_label()
+	var player = _player_scene.instance()
+	player.camera = camera_2d
+	var start_planet = _planets[0]
+	player._planet = start_planet
+	start_planet.add_child(player)
+	camera_2d.target = start_planet
+	player.translate(Vector2(0,-380))
+	camera_2d.position = start_planet.position
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func spawn_planet(offset = 0, shift_world=false):
+	_score += 1
+	_update_score_label()
+	_y_pos += _y_planet_space
+	var new_planet = _planet_scene.instance()
+	new_planet.rotation_speed = 0.4
+	new_planet.camera = camera_2d
+	new_planet.planet_sprite = floor(randf() * 8)
+	new_planet.rotation_speed = randf()
+	add_child(new_planet)
+	var random_x_offset = randf() * _x_planet_space - _x_planet_space / 2;
+	var base_position = Vector2(200 + random_x_offset, -_y_pos)
+	new_planet.position = base_position
+	if _planets.size() > 3:
+		remove_child(_planets[0])
+		var temp_planets = _planets
+		_planets = []
+		_planets.push_back(temp_planets[1])
+		_planets.push_back(temp_planets[2])
+	_planets.push_back(new_planet)
+	
+func _update_score_label():
+	score_counter.text = "Score: " + str(_score)

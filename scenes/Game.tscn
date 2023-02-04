@@ -9,3 +9,10 @@ script = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 3 )
+
+[node name="ScoreCounter" type="Label" parent="Camera2D"]
+margin_left = -451.0
+margin_top = -996.0
+margin_right = -400.0
+margin_bottom = -982.0
+text = "Score: 0"

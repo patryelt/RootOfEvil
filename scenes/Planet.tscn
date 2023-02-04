@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/PlanetSprite.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 100.0
+radius = 152.03
 
 [sub_resource type="Animation" id=2]
 resource_name = "RotatePlane"

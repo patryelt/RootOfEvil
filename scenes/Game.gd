@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var _planet_scene = preload("res://scenes/Planet.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
 onready var camera_2d = $Camera2D
@@ -7,6 +8,7 @@ onready var score_counter = $Camera2D/ScoreCounter
 var _planets = []
 var _y_pos = 0
 var _y_planet_space = 1200
+var _x_planet_space = 500
 var _score = 0
 
 func _ready():
@@ -34,7 +36,8 @@ func spawn_planet(offset = 0, shift_world=false):
 	new_planet.planet_sprite = floor(randf() * 8)
 	new_planet.rotation_speed = randf()
 	add_child(new_planet)
-	var base_position = Vector2(200, -_y_pos)
+	var random_x_offset = randf() * _x_planet_space - _x_planet_space / 2;
+	var base_position = Vector2(200 + random_x_offset, -_y_pos)
 	new_planet.position = base_position
 	if _planets.size() > 3:
 		remove_child(_planets[0])

@@ -1,7 +1,7 @@
 extends Node2D
 
 var _planet : Node2D
-var _camera : Camera2D
+var camera : Camera2D
 var _jump_direction = Vector2.ZERO
 var _jump_speed = 0
 onready var player_anim = $Area2D/player_anim
@@ -26,8 +26,7 @@ func _jump():
 	old_body.position = position
 	old_body.rotation = rotation
 	
-	# Move camera from following the planet to following the player
-	_attach_camera(_planet.detach_camera())
+	camera.target = self
 	
 	_planet.leave_planet()
 	_planet = null
@@ -58,13 +57,3 @@ func _process(delta):
 		position += _jump_direction * delta * _jump_speed
 	if Input.is_action_just_pressed("jump") and _planet:
 		_jump()
-		
-func _attach_camera(camera):
-	_camera = camera
-	add_child(_camera)
-	
-func detach_camera():
-	remove_child(_camera)
-	var camera = _camera
-	_camera = null
-	return camera

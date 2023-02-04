@@ -127,14 +127,12 @@ animations = [ {
 [node name="player_anim" type="Node2D"]
 
 [node name="stem" type="AnimatedSprite" parent="."]
-position = Vector2( 100, -392 )
-scale = Vector2( 1, 1 )
+position = Vector2( 25, -382.5 )
 frames = SubResource( 14 )
-frame = 2
 playing = true
 
 [node name="eye_anim" type="AnimatedSprite" parent="."]
-position = Vector2( 96, -831 )
+position = Vector2( 21, -821.5 )
 scale = Vector2( 0.818359, 0.818359 )
 frames = SubResource( 8 )
 frame = 1
@@ -144,16 +142,13 @@ playing = true
 anims/blinking = SubResource( 9 )
 
 [node name="flower_anim" type="AnimatedSprite" parent="."]
-position = Vector2( 77, -18.0001 )
-scale = Vector2( 1, 1 )
+position = Vector2( 2, -8.50024 )
 frames = SubResource( 19 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="bulb_anim" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 77, -18.0001 )
-scale = Vector2( 1, 1 )
 frames = SubResource( 5 )
-frame = 2
 playing = true

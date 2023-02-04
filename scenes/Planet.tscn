@@ -24,7 +24,6 @@ tracks/0/keys = {
 
 [node name="Planet" type="Node2D"]
 script = ExtResource( 1 )
-direction = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 gravity_distance_scale = 0.497
@@ -39,5 +38,13 @@ texture = ExtResource( 2 )
 [node name="RotationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RotatePlane"
 anims/RotatePlane = SubResource( 2 )
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = -48.0
+margin_top = -67.0
+margin_right = -22.0
+margin_bottom = -32.0
+rect_scale = Vector2( 4, 4 )
+text = "XD"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

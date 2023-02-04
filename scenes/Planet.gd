@@ -3,9 +3,12 @@ extends Node2D
 export(float, 0.00, 1.00, 0.01) var rotation_speed = 1
 enum Direction {CLOCKWISE = 1, COUNTERCLOCKWISE = -1}
 export(Direction) var direction
-
 #When corruption is 0, the planet is not being currently attached to a player.
 export var corruption = 0
+export(int, "start", "bot", "mid", "top") var zone = 1
+onready var _game_node = get_tree().get_root().get_node("Game")
+
+
 onready var rotationPlayer = get_node("RotationPlayer")
 var _camera
 
@@ -14,8 +17,11 @@ func _ready():
 	rotationPlayer.playback_speed = 0.01 + rotationPlayer.playback_speed * rotation_speed * direction
 	_camera = find_node("Camera2D")
 
+func _process(delta):
+	$TextEdit.text = str(zone)
+
 func leave_planet():
-	rotationPlayer.playback_active = false
+	rotationPlayer.playback_speed = 0
 
 func _on_Area2D_area_entered(area):
 	if area.get_parent().name == "Player":
@@ -34,6 +40,9 @@ func _on_Area2D_area_entered(area):
 			#set speed to 0?
 			player._jump_speed = 0
 			player.global_position = newpos
+			if (zone > 1):
+				_game_node.move_planet(2, 1)
+				_game_node.spawn_planet(2)
 			print ("Planet corruption is ", corruption)
 			
 		

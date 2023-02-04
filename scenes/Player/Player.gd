@@ -43,8 +43,8 @@ func _jump():
 func land(planet):
 	_planet = planet
 	_jump_speed = 0
-	look_at(position)
-	pass
+	look_at(planet.position)
+	rotate(-PI/2)
 	
 func _process(delta):
 	if _planet == null:

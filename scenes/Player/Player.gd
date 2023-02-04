@@ -8,7 +8,6 @@ var _jump_speed = 0
 
 func _ready():
 	planet = get_parent()
-	_attach_camera(planet.find_node("Camera2D"))
 
 func _get_jump_direction():
 	var up_direction = (global_position - planet.global_position).normalized()

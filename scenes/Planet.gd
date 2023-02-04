@@ -12,6 +12,7 @@ var _camera
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rotationPlayer.playback_speed = 0.01 + rotationPlayer.playback_speed * rotation_speed * direction
+	_camera = find_node("Camera2D")
 
 func leave_planet():
 	rotationPlayer.playback_active = false

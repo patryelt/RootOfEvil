@@ -24,6 +24,7 @@ func _jump():
 	old_body.leave()
 	_planet.add_child(old_body)
 	old_body.position = position
+	old_body.rotation = rotation
 	
 	# Move camera from following the planet to following the player
 	_attach_camera(_planet.detach_camera())
@@ -45,6 +46,12 @@ func land(planet):
 	_jump_speed = 0
 	look_at(planet.position)
 	rotate(-PI/2)
+	grow()
+	
+func grow():
+	translate(position.normalized() * 200)
+	player_anim.grow()
+
 	
 func _process(delta):
 	if _planet == null:

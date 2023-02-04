@@ -9,12 +9,11 @@
 position = Vector2( 248, 222 )
 rotation_speed = 0.0
 
-[node name="Player" parent="Planet2" instance=ExtResource( 1 )]
-position = Vector2( 2, -132 )
-
-[node name="Planet" parent="." instance=ExtResource( 2 )]
+[node name="Planet3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 226, 515 )
+rotation_speed = 0.19
 direction = -1
+corruption = 1
 
-[node name="Player" parent="Planet" instance=ExtResource( 1 )]
-position = Vector2( 71, -82 )
+[node name="Player" parent="Planet3" instance=ExtResource( 1 )]
+position = Vector2( 49, -43 )

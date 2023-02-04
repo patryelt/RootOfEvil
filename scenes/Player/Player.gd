@@ -4,7 +4,7 @@ var _planet : Node2D
 var camera : Camera2D
 var _jump_direction = Vector2.ZERO
 var _jump_speed = 0
-onready var player_anim = $Area2D/player_anim
+onready var player_anim = $player_anim
 
 
 func _ready():
@@ -56,4 +56,4 @@ func _process(delta):
 	if _planet == null:
 		position += _jump_direction * delta * _jump_speed
 	if Input.is_action_just_pressed("jump") and _planet:
-		_jump()
+		player_anim.initiate_animation()

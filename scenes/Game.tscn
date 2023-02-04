@@ -14,9 +14,8 @@ current = true
 script = ExtResource( 3 )
 
 [node name="Planet2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 216, -304 )
+position = Vector2( 246, -153 )
 rotation_speed = 0.0
-planet_sprite = 1
 
 [node name="Planet3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 249, 670 )

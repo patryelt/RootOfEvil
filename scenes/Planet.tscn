@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Planet.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/planettexture.png" type="Texture" id=2]
+[ext_resource path="res://scenes/PlanetSprite.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 100.0
+radius = 152.03
 
 [sub_resource type="Animation" id=2]
 resource_name = "RotatePlane"
@@ -29,9 +29,8 @@ direction = 1
 [node name="Area2D" type="Area2D" parent="."]
 gravity_distance_scale = 0.497
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
+[node name="PlanetSprite" parent="Area2D" instance=ExtResource( 2 )]
+scale = Vector2( 0.3, 0.3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

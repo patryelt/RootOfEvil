@@ -283,11 +283,10 @@ frame = 2
 playing = true
 
 [node name="eye_anim" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( -2.00002, 15.0002 )
 scale = Vector2( 0.818359, 0.818359 )
 frames = SubResource( 27 )
-frame = 4
+frame = 5
 
 [node name="Eye_animationplayer" type="AnimationPlayer" parent="eye_anim"]
 autoplay = "blinking"
@@ -316,13 +315,14 @@ playback_speed = 0.31
 anims/Stretchy = SubResource( 35 )
 
 [node name="eye_burst" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 9.24993, 13.0002 )
 scale = Vector2( 0.817383, 0.818359 )
 frames = SubResource( 33 )
-frame = 3
 
 [node name="burst_animationplayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../projectile")
 autoplay = "Stretchy"
+playback_speed = 1.2
 anims/Stretchy = SubResource( 28 )
 "anims/Trigger Projectile" = SubResource( 34 )

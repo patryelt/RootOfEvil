@@ -151,7 +151,7 @@ animations = [ {
 [node name="stem" type="AnimatedSprite" parent="."]
 position = Vector2( 100, -392 )
 frames = SubResource( 14 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="eye_burst" type="AnimatedSprite" parent="."]
@@ -165,18 +165,17 @@ playing = true
 position = Vector2( 96, -831 )
 scale = Vector2( 0.818359, 0.818359 )
 frames = SubResource( 8 )
-frame = 4
 playing = true
 
 [node name="flower_anim" type="AnimatedSprite" parent="."]
 position = Vector2( 77, -18.0001 )
 frames = SubResource( 19 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="bulb_anim" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 77, -18.0001 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true

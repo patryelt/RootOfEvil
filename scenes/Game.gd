@@ -3,14 +3,18 @@ extends Node2D
 var _planet_scene = preload("res://scenes/Planet.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
 onready var camera_2d = $Camera2D
+onready var score_counter = $Camera2D/ScoreCounter 
 var _planets = []
 var _y_pos = 0
 var _y_planet_space = 1200
+var _score = 0
 
 func _ready():
 	spawn_planet()
 	spawn_planet()
 	spawn_planet()
+	_score = 0
+	_update_score_label()
 	var player = _player_scene.instance()
 	player.camera = camera_2d
 	var start_planet = _planets[0]
@@ -21,10 +25,14 @@ func _ready():
 	camera_2d.position = start_planet.position
 
 func spawn_planet(offset = 0, shift_world=false):
+	_score += 1
+	_update_score_label()
 	_y_pos += _y_planet_space
 	var new_planet = _planet_scene.instance()
 	new_planet.rotation_speed = 0.4
 	new_planet.camera = camera_2d
+	new_planet.planet_sprite = floor(randf() * 8)
+	new_planet.rotation_speed = randf()
 	add_child(new_planet)
 	var base_position = Vector2(200, -_y_pos)
 	new_planet.position = base_position
@@ -35,3 +43,6 @@ func spawn_planet(offset = 0, shift_world=false):
 		_planets.push_back(temp_planets[1])
 		_planets.push_back(temp_planets[2])
 	_planets.push_back(new_planet)
+	
+func _update_score_label():
+	score_counter.text = "Score: " + str(_score)

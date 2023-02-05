@@ -51,6 +51,7 @@ func land(planet):
 	grow()
 	_elapsed_time_drifting = 0
 	emit_signal("landing_on_planet")
+	$landaudio.play()
 	
 func grow():
 	translate(position.normalized() * 200)

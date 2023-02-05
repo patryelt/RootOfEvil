@@ -87,15 +87,14 @@ config/icon="res://icon.png"
 [autoload]
 
 BgMusic="*res://scenes/bg_music.tscn"
+PlayerVariables="*res://scenes/Player/PlayerVariables.gd"
 
 [display]
 
 window/size/width=768
 window/size/height=1366
-window/size/always_on_top=true
-window/size/test_width=720
-window/size/test_height=1280
 window/handheld/orientation="portrait"
+window/stretch/shrink=0.41
 
 [editor_plugins]
 

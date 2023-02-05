@@ -1,10 +1,16 @@
 extends Node2D
 
+const TIME_TO_DIE = 3
+
+signal drifting_endlessly(player)
+signal landing_on_planet
+
 var _planet : Node2D
 var camera : Camera2D
 var _jump_direction = Vector2.ZERO
 var _jump_speed = 0
 onready var player_anim = $player_anim
+var _elapsed_time_drifting = 0
 
 
 func _get_jump_direction():
@@ -43,18 +49,19 @@ func land(planet):
 	look_at(planet.position)
 	rotate(-PI/2)
 	grow()
-	var game_node = get_parent().get_parent()
-	game_node.spawn_planet()
-	
+	_elapsed_time_drifting = 0
+	emit_signal("landing_on_planet")
 	
 func grow():
 	translate(position.normalized() * 200)
 	player_anim.grow()
-
 	
 func _process(delta):
 	if _planet == null:
 		position += _jump_direction * delta * _jump_speed
+		_elapsed_time_drifting += delta
+		if _elapsed_time_drifting > TIME_TO_DIE:
+			emit_signal("drifting_endlessly", self)
 	if Input.is_action_just_pressed("jump") and _planet:
 		initiate_jump()
 		

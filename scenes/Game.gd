@@ -12,19 +12,7 @@ var _x_planet_space = 500
 var _score = 0
 
 func _ready():
-	spawn_planet()
-	spawn_planet()
-	spawn_planet()
-	_score = 0
-	_update_score_label()
-	var player = _player_scene.instance()
-	player.camera = camera_2d
-	var start_planet = _planets[0]
-	player._planet = start_planet
-	start_planet.add_child(player)
-	camera_2d.target = start_planet
-	player.translate(Vector2(0,-380))
-	camera_2d.position = start_planet.position
+	initialize()
 
 func spawn_planet(offset = 0, shift_world=false):
 	_score += 1
@@ -49,3 +37,29 @@ func spawn_planet(offset = 0, shift_world=false):
 	
 func _update_score_label():
 	score_counter.text = "Score: " + str(_score)
+
+func initialize():
+	spawn_planet()
+	spawn_planet()
+	spawn_planet()
+	_score = 0
+	_update_score_label()
+	var player = _player_scene.instance()
+	player.connect("drifting_endlessly", self, "_on_Player_drifting_endlessly")
+	player.camera = camera_2d
+	var start_planet = _planets[0]
+	player._planet = start_planet
+	start_planet.add_child(player)
+	camera_2d.target = start_planet
+	player.translate(Vector2(0,-380))
+	camera_2d.position = start_planet.position
+	
+	
+func _on_Player_drifting_endlessly(player):
+	print("hej")
+	remove_child(player)
+	for planet in _planets:
+		remove_child(planet)
+	_planets = []
+	initialize()
+	

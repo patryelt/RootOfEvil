@@ -10,22 +10,39 @@ var _y_pos = 0
 var _y_planet_space = 1200
 var _x_planet_space = 500
 var _score = 0
+var _stage_score = 0
+var _stage_speed = 0.10
+
+var rng = RandomNumberGenerator.new()
+
 
 func _ready():
 	initialize()
 
-func spawn_planet(offset = 0, shift_world=false):
+func spawn_planet():
 	_score += 1
+	_stage_score +=1
 	_update_score_label()
+	if (_stage_score > 2):
+		_stage_score = 0
+		_stage_speed += 0.05
+		
+	
 	_y_pos += _y_planet_space
 	var new_planet = _planet_scene.instance()
-	new_planet.rotation_speed = 0.4
+	
+	rng.randomize()
+	var random_speed = rng.randf()
+	var random_offset = rng.randf_range(1, 2)
+	
 	new_planet.camera = camera_2d
-	new_planet.planet_sprite = floor(randf() * 8)
-	new_planet.rotation_speed = randf()
+	new_planet.planet_sprite = floor(rng.randf() * 8)
+	new_planet.rotation_speed = _stage_speed * random_speed
 	add_child(new_planet)
-	var random_x_offset = randf() * _x_planet_space - _x_planet_space / 2;
+	var random_x_offset = random_offset * _x_planet_space - _x_planet_space / 2;
 	var base_position = Vector2(200 + random_x_offset, -_y_pos)
+	
+	
 	new_planet.position = base_position
 	if _planets.size() > 3:
 		remove_child(_planets[0])
@@ -56,10 +73,10 @@ func initialize():
 	
 	
 func _on_Player_drifting_endlessly(player):
-	print("hej")
 	remove_child(player)
 	for planet in _planets:
 		remove_child(planet)
 	_planets = []
 	initialize()
-	
+
+

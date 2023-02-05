@@ -14,6 +14,10 @@ config/name="RootOfEvil"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+BgMusic="*res://scenes/bg_music.tscn"
+
 [display]
 
 window/size/width=768

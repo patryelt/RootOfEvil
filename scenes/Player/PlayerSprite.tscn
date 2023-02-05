@@ -294,6 +294,7 @@ script = ExtResource( 5 )
 [node name="stem" type="AnimatedSprite" parent="."]
 position = Vector2( 9, 460.5 )
 frames = SubResource( 14 )
+frame = 2
 playing = true
 
 [node name="eye_anim" type="AnimatedSprite" parent="."]
@@ -310,13 +311,14 @@ anims/blinking = SubResource( 9 )
 [node name="flower_anim" type="AnimatedSprite" parent="."]
 position = Vector2( -14, 834.5 )
 frames = SubResource( 19 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="bulb_anim" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 77, -18.0001 )
 frames = SubResource( 5 )
+frame = 2
 playing = true
 
 [node name="projectile" type="Sprite" parent="."]

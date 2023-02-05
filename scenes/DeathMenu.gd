@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 signal play_button_pressed
 
@@ -12,7 +12,7 @@ func _ready():
 	$CenterContainer/VBoxContainer/PlayerSprite/eye_burst.hide()
 
 func _on_play_pressed():
-	emit_signal("play_button_pressed")
+	get_tree().change_scene("res://scenes/Game.tscn")
 
 func set_score(score):
 	score_label.text = str(score) + " planets"

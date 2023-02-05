@@ -4,7 +4,6 @@ var _planet_scene = preload("res://scenes/Planet.tscn")
 var _wormhole_scene = preload("res://scenes/Wormhole.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
 
-onready var death_menu = $DeathMenu
 onready var camera_2d = $Camera2D
 var _planets = []
 var _y_pos = 0
@@ -17,6 +16,9 @@ var stage = 1
 var current_dialogue
 var tutorial1_has_called:bool
 var tutorial2_has_called:bool
+var first_planet_spawned:bool
+var earth_planet_spawned:bool
+
 
 var rng = RandomNumberGenerator.new()
 
@@ -34,10 +36,20 @@ func spawn_planet():
 	var random_speed = rng.randf_range(0.9,1.1)
 	var random_offset = rng.randf_range(1, 2)
 	new_planet.camera = camera_2d
-	new_planet.planet_sprite = floor(rng.randf() * 8)
 	new_planet.rotation_speed = _stage_speed * random_speed
 	if stage > 1 and rng.randf() > 0.5:
 		new_planet.direction = -1
+	
+	new_planet.planet_sprite = floor(rng.randf() * 5)
+	if (_score == 0 and !first_planet_spawned):
+		new_planet.planet_sprite = 7
+		first_planet_spawned = true
+	if (_score == 1 and !earth_planet_spawned):
+		new_planet.planet_sprite = 6
+		new_planet.rotation_speed = 0.05
+		new_planet.rotation = -3
+		earth_planet_spawned = true
+		
 	add_child(new_planet)
 	var random_x_offset = random_offset * _x_planet_space - _x_planet_space / 2;
 	var base_position = Vector2(200 + random_x_offset, -_y_pos)
@@ -52,6 +64,7 @@ func spawn_planet():
 	_planets.push_back(new_planet)
 	
 func initialize():
+	first_planet_spawned = false
 	_score = 0
 	_stage_score = 0
 	_stage_speed = 0.15
@@ -72,12 +85,7 @@ func initialize():
 func _on_Player_drifting_endlessly(player):
 	camera_2d.target = null
 	camera_2d.position = Vector2(0,0)
-	death_menu.set_score(_score)
-	death_menu.show()
-
-func _on_DeathMenu_play_button_pressed():
-	death_menu.hide()
-	get_tree().reload_current_scene()
+	get_tree().change_scene("res://scenes/DeathMenu.tscn")
 	
 func _on_Player_landing_on_planet():
 	_score += 1

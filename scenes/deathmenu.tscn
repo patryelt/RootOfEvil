@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/game_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/game_font_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/DeathMenu.gd" type="Script" id=3]
+[ext_resource path="res://assets/art/logo_white.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -44,11 +45,13 @@ margin_right = 332.0
 margin_bottom = 339.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_top = 94.0
 margin_right = 648.0
-margin_bottom = 678.0
+margin_bottom = 583.0
 custom_constants/separation = 100
 
 [node name="title" type="Label" parent="CenterContainer/VBoxContainer"]
+visible = false
 margin_right = 648.0
 margin_bottom = 89.0
 theme = SubResource( 1 )
@@ -56,10 +59,14 @@ text = "ROOT OF EVIL"
 align = 1
 valign = 1
 
+[node name="LogoWhite" type="Sprite" parent="CenterContainer/VBoxContainer"]
+position = Vector2( 316, -270 )
+scale = Vector2( 0.667969, 0.667969 )
+texture = ExtResource( 4 )
+
 [node name="Flavor" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 189.0
 margin_right = 648.0
-margin_bottom = 300.0
+margin_bottom = 111.0
 theme = SubResource( 2 )
 text = "To LIVE
 You had to root your EVIL on:"
@@ -67,18 +74,18 @@ align = 1
 valign = 1
 
 [node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 400.0
+margin_top = 211.0
 margin_right = 648.0
-margin_bottom = 489.0
+margin_bottom = 300.0
 theme = SubResource( 1 )
 text = "1337 planets"
 align = 1
 valign = 1
 
 [node name="play" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 589.0
+margin_top = 400.0
 margin_right = 648.0
-margin_bottom = 678.0
+margin_bottom = 489.0
 theme = SubResource( 1 )
 text = "TAP TO REPLAY"
 

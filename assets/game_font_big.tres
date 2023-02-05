@@ -4,7 +4,7 @@
 font_path = "res://assets/Kurland.ttf"
 
 [resource]
-size = 150
+size = 84
 outline_color = Color( 0.662745, 0.658824, 0.658824, 1 )
 use_mipmaps = true
 font_data = SubResource( 1 )

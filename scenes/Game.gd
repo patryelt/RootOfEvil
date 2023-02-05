@@ -1,8 +1,9 @@
 extends Node2D
 
-
 var _planet_scene = preload("res://scenes/Planet.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
+
+onready var death_menu = $DeathMenu
 onready var camera_2d = $Camera2D
 onready var score_counter = $Camera2D/ScoreCounter 
 var _planets = []
@@ -71,12 +72,16 @@ func initialize():
 	player.translate(Vector2(0,-380))
 	camera_2d.position = start_planet.position
 	
-	
 func _on_Player_drifting_endlessly(player):
 	remove_child(player)
 	for planet in _planets:
 		remove_child(planet)
 	_planets = []
+	_y_pos = 0
+	camera_2d.target = null
+	camera_2d.position = Vector2(0,0)
+	death_menu.show()
+
+func _on_DeathMenu_play_button_pressed():
+	death_menu.hide()
 	initialize()
-
-

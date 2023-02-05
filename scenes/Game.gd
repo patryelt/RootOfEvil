@@ -5,7 +5,6 @@ var _player_scene = preload("res://scenes/Player/Player.tscn")
 
 onready var death_menu = $DeathMenu
 onready var camera_2d = $Camera2D
-onready var score_counter = $Camera2D/ScoreCounter 
 var _planets = []
 var _y_pos = 0
 var _y_planet_space = 1200
@@ -44,9 +43,6 @@ func spawn_planet():
 		_planets.push_back(temp_planets[2])
 	_planets.push_back(new_planet)
 	
-func _update_score_label():
-	score_counter.text = "Score: " + str(_score)
-
 func initialize():
 	_score = 0
 	_stage_score = 0
@@ -54,7 +50,6 @@ func initialize():
 	spawn_planet()
 	spawn_planet()
 	spawn_planet()
-	_update_score_label()
 	var player = _player_scene.instance()
 	player.connect("drifting_endlessly", self, "_on_Player_drifting_endlessly")
 	player.connect("landing_on_planet", self, "_on_Player_landing_on_planet")
@@ -74,6 +69,7 @@ func _on_Player_drifting_endlessly(player):
 	_y_pos = 0
 	camera_2d.target = null
 	camera_2d.position = Vector2(0,0)
+	death_menu.set_score(_score)
 	death_menu.show()
 
 func _on_DeathMenu_play_button_pressed():
@@ -88,6 +84,5 @@ func _on_Player_landing_on_planet():
 		_stage_score = 0
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
-	_update_score_label()
 	spawn_planet()
 	

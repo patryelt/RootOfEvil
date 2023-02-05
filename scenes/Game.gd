@@ -21,11 +21,13 @@ var tutorial2_has_called:bool
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	var dialogic_start = Dialogic.start('start')
-	add_child(dialogic_start)
+	# Temporarily disabled due to blocking input	
+#	var dialogic_start = Dialogic.start('start')
+#	add_child(dialogic_start)
 	initialize()
 
 func spawn_planet():
+	print(_score)
 	_y_pos += _y_planet_space
 	var new_planet = _planet_scene.instance()
 	rng.randomize()
@@ -68,11 +70,6 @@ func initialize():
 	camera_2d.position = start_planet.position
 	
 func _on_Player_drifting_endlessly(player):
-	remove_child(player)
-	for planet in _planets:
-		remove_child(planet)
-	_planets = []
-	_y_pos = 0
 	camera_2d.target = null
 	camera_2d.position = Vector2(0,0)
 	death_menu.set_score(_score)
@@ -80,7 +77,7 @@ func _on_Player_drifting_endlessly(player):
 
 func _on_DeathMenu_play_button_pressed():
 	death_menu.hide()
-	initialize()
+	get_tree().reload_current_scene()
 	
 func _on_Player_landing_on_planet():
 	_score += 1
@@ -90,11 +87,9 @@ func _on_Player_landing_on_planet():
 		_stage_score = 0
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
-	trigger_dialogue()
-	if(_score == 3):
-		spawn_wormhole()
-	else:
-		spawn_planet()
+	# Temporarily disabled due to blocking input
+#	trigger_dialogue()
+	spawn_planet()
 	
 func spawn_wormhole():
 	

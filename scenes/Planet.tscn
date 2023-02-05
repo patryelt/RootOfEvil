@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/Planet.gd" type="Script" id=1]
 [ext_resource path="res://scenes/PlanetSprite.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/corruption.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sound/corruption.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/art/shader/corruption_roots_01_alpha_gradient.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 100.0
@@ -67,6 +69,109 @@ tracks/1/keys = {
 "method": "kick_player"
 } ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("CorruptionPlayer/corruptionsound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="VisualShaderNodeVectorOp" id=6]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=11]
+operator = 9
+
+[sub_resource type="VisualShaderNodeColorUniform" id=12]
+uniform_name = "ColorUniform"
+default_value_enabled = true
+default_value = Color( 0.903821, 0, 1, 1 )
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=7]
+uniform_name = "ScalarUniform"
+hint = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=8]
+operator = 9
+
+[sub_resource type="VisualShaderNodeTexture" id=10]
+texture = ExtResource( 5 )
+
+[sub_resource type="VisualShader" id=13]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_8;
+uniform vec4 ColorUniform : hint_color = vec4(0.903821, 0.000000, 1.000000, 1.000000);
+uniform float ScalarUniform : hint_range(0, 1);
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:8
+	vec4 tex_frg_8_read = texture(tex_frg_8, UV.xy);
+	vec3 n_out8p0 = tex_frg_8_read.rgb;
+	float n_out8p1 = tex_frg_8_read.a;
+
+// ColorUniform:3
+	vec3 n_out3p0 = ColorUniform.rgb;
+	float n_out3p1 = ColorUniform.a;
+
+// VectorOp:12
+	vec3 n_out12p0 = n_out8p0 * n_out3p0;
+
+// ScalarUniform:5
+	float n_out5p0 = ScalarUniform;
+
+// ScalarOp:6
+	float n_out6p0 = step(n_out5p0, dot(n_out8p0, vec3(0.333333, 0.333333, 0.333333)));
+
+// Output:0
+	COLOR.rgb = n_out12p0;
+	COLOR.a = n_out6p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 600, 160 )
+nodes/fragment/3/node = SubResource( 12 )
+nodes/fragment/3/position = Vector2( -20, 140 )
+nodes/fragment/5/node = SubResource( 7 )
+nodes/fragment/5/position = Vector2( -120, 620 )
+nodes/fragment/6/node = SubResource( 8 )
+nodes/fragment/6/position = Vector2( 380, 660 )
+nodes/fragment/8/node = SubResource( 10 )
+nodes/fragment/8/position = Vector2( -134.714, 911.587 )
+nodes/fragment/12/node = SubResource( 6 )
+nodes/fragment/12/position = Vector2( 340, 320 )
+nodes/fragment/13/node = SubResource( 11 )
+nodes/fragment/13/position = Vector2( 400, 800 )
+nodes/fragment/connections = PoolIntArray( 5, 0, 6, 0, 6, 0, 0, 1, 8, 0, 6, 1, 3, 0, 12, 1, 12, 0, 0, 0, 8, 0, 12, 0 )
+
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+render_priority = 1
+shader = SubResource( 13 )
+shader_param/ColorUniform = Color( 1, 0, 0.494118, 1 )
+shader_param/ScalarUniform = 0.4
 
 [node name="Planet" type="Node2D"]
 script = ExtResource( 1 )
@@ -89,7 +194,11 @@ anims/RotatePlane = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 "anims/Trigger Corruption" = SubResource( 4 )
 
+[node name="corruptionsound" type="AudioStreamPlayer2D" parent="CorruptionPlayer"]
+stream = ExtResource( 4 )
+
 [node name="Corruption" parent="." instance=ExtResource( 3 )]
+material = SubResource( 14 )
 position = Vector2( 4, 7 )
 scale = Vector2( 0.31, 0.31 )
 

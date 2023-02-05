@@ -79,7 +79,7 @@ func initialize():
 	player._planet = start_planet
 	start_planet.add_child(player)
 	camera_2d.target = start_planet
-	player.translate(Vector2(0,-380))
+	player.translate(Vector2(0,-480))
 	camera_2d.position = start_planet.position
 	
 func _on_Player_drifting_endlessly(player):

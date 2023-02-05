@@ -21,7 +21,6 @@ window/size/height=1366
 window/size/test_width=720
 window/size/test_height=1280
 window/handheld/orientation="portrait"
-window/stretch/shrink=0.67
 
 [gui]
 

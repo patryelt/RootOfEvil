@@ -24,7 +24,6 @@ func leave_planet():
 func _on_Area2D_area_entered(area):
 	if area.get_parent().name == "Player":
 		player = area.get_parent()
-		print ("Planet corruption is ", corruption)
 		if corruption <= 0:
 			activate_corruption(player)
 			
@@ -41,11 +40,10 @@ func _on_Area2D_area_entered(area):
 			
 			
 		
-		print("Collided with '", self.name, "'!")
+		# print("Collided with '", self.name, "'!")
 		pass
 
 func activate_corruption(var player):
-	print("ACTIVATING CORRUPTION")
 	corruption = 1
 	corruptionPlayer.play("Trigger Corruption")
 	

@@ -3,6 +3,7 @@ extends Node2D
 const TIME_TO_DIE = 3
 
 signal drifting_endlessly(player)
+signal landing_on_planet
 
 var _planet : Node2D
 var camera : Camera2D
@@ -48,9 +49,8 @@ func land(planet):
 	look_at(planet.position)
 	rotate(-PI/2)
 	grow()
-	var game_node = get_parent().get_parent()
-	game_node.spawn_planet()
 	_elapsed_time_drifting = 0
+	emit_signal("landing_on_planet")
 	
 func grow():
 	translate(position.normalized() * 200)

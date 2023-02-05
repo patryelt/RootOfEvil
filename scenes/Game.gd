@@ -13,6 +13,9 @@ var _score = 0
 var _stage_score = 0
 var _stage_speed = 0.15
 var stage = 1
+var current_dialogue
+var tutorial1_has_called:bool
+var tutorial2_has_called:bool
 
 var rng = RandomNumberGenerator.new()
 
@@ -86,15 +89,29 @@ func _on_Player_landing_on_planet():
 		_stage_score = 0
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
-	_update_score_label()
 	trigger_dialogue()
 	spawn_planet()
 	
 func trigger_dialogue():
-	if (_score == 1):
-		var dialogic_start = Dialogic.start('first_jump')
-		add_child(dialogic_start)
-	if (_score == 2):
-		var dialogic_start = Dialogic.start('second_jump')
-		add_child(dialogic_start)
+	var random_dialogue = rng.randi_range(0, 9)
+	print(random_dialogue)
+	
+	
+	if(is_instance_valid(current_dialogue)):
+		current_dialogue.queue_free()
+	
+	# DIALOGUES
+	if (_score == 1 and !tutorial1_has_called):
+		current_dialogue = Dialogic.start('first_jump')
+		add_child(current_dialogue)
+		tutorial1_has_called = true
+	if (_score == 2 and !tutorial2_has_called):
+		current_dialogue = Dialogic.start('second_jump')
+		add_child(current_dialogue)
+		tutorial2_has_called = true
+		
+	if (_score % 4 == 0):
+		pass
+	
+	
 	

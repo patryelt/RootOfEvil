@@ -28,7 +28,7 @@ func spawn_planet():
 	new_planet.camera = camera_2d
 	new_planet.planet_sprite = floor(rng.randf() * 8)
 	new_planet.rotation_speed = _stage_speed * random_speed
-	if randf() > 0.5:
+	if stage > 1 and rng.randf() > 0.5:
 		new_planet.direction = -1
 	add_child(new_planet)
 	var random_x_offset = random_offset * _x_planet_space - _x_planet_space / 2;

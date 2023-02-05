@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Lobo Loco - Alien Time Traveller (ID 362) background.mp3-b266818e5392b4ffff0a96ad45d073ab.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/Lobo Loco - Alien Time Traveller (ID 362) background.mp3"
+dest_files=[ "res://.import/Lobo Loco - Alien Time Traveller (ID 362) background.mp3-b266818e5392b4ffff0a96ad45d073ab.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

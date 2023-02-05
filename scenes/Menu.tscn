@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/game_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/game_font_big.tres" type="DynamicFont" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -18,15 +19,19 @@ Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
 
+[sub_resource type="Theme" id=3]
+default_font = ExtResource( 3 )
+
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 2 )
 
-[node name="Menu" type="Control"]
+[node name="StartMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Button" type="Button" parent="."]
+visible = false
 margin_left = 115.0
 margin_top = 972.0
 margin_right = 236.0
@@ -36,23 +41,45 @@ theme = SubResource( 1 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 text = "PLAY"
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.085
-anchor_right = 0.909
-anchor_bottom = 0.38
-margin_left = 9.6
-margin_right = 3.03992
-margin_bottom = -1.80005
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 56.0
+margin_top = 324.0
+margin_right = 712.0
+margin_bottom = 1041.0
+custom_constants/separation = 100
+
+[node name="title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 656.0
+margin_bottom = 89.0
+theme = SubResource( 3 )
+text = "ROOT OF EVIL"
+align = 1
+valign = 1
+
+[node name="credit" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 189.0
+margin_right = 656.0
+margin_bottom = 528.0
 theme = SubResource( 2 )
-text = "Root of Evil
-Global Game Jam 2023
+text = "Global Game Jam 2023
 
 Johan Handin: Artist
-Patricia Ferhm: Artist
+Patricia Fehrm: Artist
 Patrik Hjelt: Programmer
-Edwin Danielsson: Programmer
+Edvin Danielsson: Programmer"
+align = 1
+valign = 1
 
-TAP TO PLAY"
+[node name="play" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 628.0
+margin_right = 656.0
+margin_bottom = 717.0
+theme = SubResource( 3 )
+text = "TAP TO PLAY"
 align = 1
 valign = 1
 

@@ -8,7 +8,9 @@ export(int, 7) var planet_sprite
 #When corruption is 0, the planet is not being currently attached to a player.
 export var corruption = 0
 onready var rotationPlayer = get_node("RotationPlayer")
+onready var corruptionPlayer = get_node("CorruptionPlayer")
 var camera
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,9 +23,10 @@ func leave_planet():
 
 func _on_Area2D_area_entered(area):
 	if area.get_parent().name == "Player":
-		var player = area.get_parent()
+		player = area.get_parent()
+		print ("Planet corruption is ", corruption)
 		if corruption <= 0:
-			corruption = 1
+			activate_corruption(player)
 			
 			var newpos = player.global_position
 			get_parent().remove_child(player)
@@ -35,8 +38,17 @@ func _on_Area2D_area_entered(area):
 			#set speed to 0?
 			player.global_position = newpos
 			player.land(self)
-			print ("Planet corruption is ", corruption)
+			
 			
 		
 		print("Collided with '", self.name, "'!")
 		pass
+
+func activate_corruption(var player):
+	print("ACTIVATING CORRUPTION")
+	corruption = 1
+	corruptionPlayer.play("Trigger Corruption")
+	
+func kick_player():
+	if (player._planet == self):
+		player.initiate_jump()

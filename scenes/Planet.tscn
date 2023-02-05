@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Planet.gd" type="Script" id=1]
 [ext_resource path="res://scenes/PlanetSprite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/corruption.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 100.0
@@ -22,6 +23,51 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Corruption:material:shader_param/ScalarUniform")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Trigger Corruption"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Corruption:material:shader_param/ScalarUniform")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 0.133971 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 10 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "kick_player"
+} ]
+}
+
 [node name="Planet" type="Node2D"]
 script = ExtResource( 1 )
 direction = 1
@@ -38,5 +84,13 @@ shape = SubResource( 1 )
 [node name="RotationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RotatePlane"
 anims/RotatePlane = SubResource( 2 )
+
+[node name="CorruptionPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+"anims/Trigger Corruption" = SubResource( 4 )
+
+[node name="Corruption" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4, 7 )
+scale = Vector2( 0.31, 0.31 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

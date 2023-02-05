@@ -56,4 +56,7 @@ func _process(delta):
 	if _planet == null:
 		position += _jump_direction * delta * _jump_speed
 	if Input.is_action_just_pressed("jump") and _planet:
-		player_anim.initiate_animation()
+		initiate_jump()
+		
+func initiate_jump():
+	player_anim.initiate_animation()

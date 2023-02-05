@@ -1,6 +1,7 @@
 extends Node2D
 
 var _planet_scene = preload("res://scenes/Planet.tscn")
+var _wormhole_scene = preload("res://scenes/Wormhole.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
 
 onready var death_menu = $DeathMenu
@@ -90,7 +91,14 @@ func _on_Player_landing_on_planet():
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
 	trigger_dialogue()
-	spawn_planet()
+	if(_score == 3):
+		spawn_wormhole()
+	else:
+		spawn_planet()
+	
+func spawn_wormhole():
+	
+	pass
 	
 func trigger_dialogue():
 	var random_dialogue = rng.randi_range(0, 9)

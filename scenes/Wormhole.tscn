@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Planet.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/planets/wormhole.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 120.507
+
+[sub_resource type="Animation" id=2]
+resource_name = "RotatePlane"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Wormhole" type="Node2D"]
+script = ExtResource( 1 )
+direction = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+gravity_distance_scale = 0.497
+
+[node name="WormholeSprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="RotationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RotatePlane"
+anims/RotatePlane = SubResource( 2 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

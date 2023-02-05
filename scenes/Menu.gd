@@ -15,6 +15,5 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_Button_pressed():
+func _on_play_pressed():
 	get_tree().change_scene("res://scenes/Game.tscn") # Replace with function body.

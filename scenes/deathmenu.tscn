@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/game_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/game_font_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/DeathMenu.gd" type="Script" id=3]
 [ext_resource path="res://assets/art/logo_white.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Player/PlayerSprite.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -88,5 +89,10 @@ margin_right = 648.0
 margin_bottom = 489.0
 theme = SubResource( 1 )
 text = "TAP TO REPLAY"
+
+[node name="PlayerSprite" parent="CenterContainer/VBoxContainer" instance=ExtResource( 5 )]
+position = Vector2( 330, 624 )
+rotation = 0.872665
+scale = Vector2( 0.3, 0.3 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/play" to="." method="_on_play_pressed"]

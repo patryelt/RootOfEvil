@@ -3,13 +3,13 @@ extends Node2D
 var _planet_scene = preload("res://scenes/Planet.tscn")
 var _wormhole_scene = preload("res://scenes/Wormhole.tscn")
 var _player_scene = preload("res://scenes/Player/Player.tscn")
+onready var player_vars = get_node("/root/PlayerVariables")
 
 onready var camera_2d = $Camera2D
 var _planets = []
 var _y_pos = 0
 var _y_planet_space = 1200
 var _x_planet_space = 500
-var _score = 0
 var _stage_score = 0
 var _stage_speed = 0.15
 var stage = 1
@@ -29,7 +29,7 @@ func _ready():
 	initialize()
 
 func spawn_planet():
-	print(_score)
+	print(player_vars.score)
 	_y_pos += _y_planet_space
 	var new_planet = _planet_scene.instance()
 	rng.randomize()
@@ -41,10 +41,10 @@ func spawn_planet():
 		new_planet.direction = -1
 	
 	new_planet.planet_sprite = floor(rng.randf() * 5)
-	if (_score == 0 and !first_planet_spawned):
+	if (player_vars.score == 0 and !first_planet_spawned):
 		new_planet.planet_sprite = 7
 		first_planet_spawned = true
-	if (_score == 1 and !earth_planet_spawned):
+	if (player_vars.score == 1 and !earth_planet_spawned):
 		new_planet.planet_sprite = 6
 		new_planet.rotation_speed = 0.05
 		new_planet.rotation = -3
@@ -65,7 +65,7 @@ func spawn_planet():
 	
 func initialize():
 	first_planet_spawned = false
-	_score = 0
+	player_vars.score = 0
 	_stage_score = 0
 	_stage_speed = 0.15
 	spawn_planet()
@@ -88,7 +88,7 @@ func _on_Player_drifting_endlessly(player):
 	get_tree().change_scene("res://scenes/deathmenu.tscn")
 	
 func _on_Player_landing_on_planet():
-	_score += 1
+	player_vars.score += 1
 	_stage_score +=1
 	if (_stage_score > 1):
 		stage += 1
@@ -112,16 +112,16 @@ func trigger_dialogue():
 		current_dialogue.queue_free()
 	
 	# DIALOGUES
-	if (_score == 1 and !tutorial1_has_called):
+	if (player_vars.score == 1 and !tutorial1_has_called):
 		current_dialogue = Dialogic.start('first_jump')
 		add_child(current_dialogue)
 		tutorial1_has_called = true
-	if (_score == 2 and !tutorial2_has_called):
+	if (player_vars.score == 2 and !tutorial2_has_called):
 		current_dialogue = Dialogic.start('second_jump')
 		add_child(current_dialogue)
 		tutorial2_has_called = true
 		
-	if (_score % 4 == 0):
+	if (player_vars.score % 4 == 0):
 		pass
 	
 	

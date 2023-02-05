@@ -44,7 +44,7 @@ func spawn_planet():
 	if (player_vars.score == 0 and !first_planet_spawned):
 		new_planet.planet_sprite = 7
 		first_planet_spawned = true
-	if (player_vars.score == 1 and !earth_planet_spawned):
+	if (player_vars.score == 17 and !earth_planet_spawned):
 		new_planet.planet_sprite = 6
 		new_planet.rotation_speed = 0.05
 		new_planet.rotation = -3

@@ -85,7 +85,7 @@ func initialize():
 func _on_Player_drifting_endlessly(player):
 	camera_2d.target = null
 	camera_2d.position = Vector2(0,0)
-	get_tree().change_scene("res://scenes/DeathMenu.tscn")
+	get_tree().change_scene("res://scenes/deathmenu.tscn")
 	
 func _on_Player_landing_on_planet():
 	_score += 1

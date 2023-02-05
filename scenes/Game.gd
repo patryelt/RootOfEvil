@@ -18,6 +18,8 @@ var stage = 1
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	var dialogic_start = Dialogic.start('start')
+	add_child(dialogic_start)
 	initialize()
 
 func spawn_planet():
@@ -89,5 +91,14 @@ func _on_Player_landing_on_planet():
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
 	_update_score_label()
+	trigger_dialogue()
 	spawn_planet()
+	
+func trigger_dialogue():
+	if (_score == 1):
+		var dialogic_start = Dialogic.start('first_jump')
+		add_child(dialogic_start)
+	if (_score == 2):
+		var dialogic_start = Dialogic.start('second_jump')
+		add_child(dialogic_start)
 	

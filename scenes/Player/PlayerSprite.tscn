@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/art/eye.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/bulb.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Player/PlayerSprite.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/eye_burst.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/eye_projectile.png" type="Texture" id=7]
+[ext_resource path="res://assets/sound/jump.wav" type="AudioStream" id=8]
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
@@ -272,6 +273,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("../jump audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="PlayerSprite" type="Node2D"]
 script = ExtResource( 5 )
@@ -279,10 +294,11 @@ script = ExtResource( 5 )
 [node name="stem" type="AnimatedSprite" parent="."]
 position = Vector2( 9, 460.5 )
 frames = SubResource( 14 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="eye_anim" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( -2.00002, 15.0002 )
 scale = Vector2( 0.818359, 0.818359 )
 frames = SubResource( 27 )
@@ -295,13 +311,14 @@ anims/blinking = SubResource( 9 )
 [node name="flower_anim" type="AnimatedSprite" parent="."]
 position = Vector2( -14, 834.5 )
 frames = SubResource( 19 )
+frame = 2
 playing = true
 
 [node name="bulb_anim" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 77, -18.0001 )
 frames = SubResource( 5 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="projectile" type="Sprite" parent="."]
@@ -314,7 +331,6 @@ playback_speed = 0.31
 anims/Stretchy = SubResource( 35 )
 
 [node name="eye_burst" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 9.24993, 13.0002 )
 scale = Vector2( 0.817383, 0.818359 )
 frames = SubResource( 33 )
@@ -325,3 +341,8 @@ autoplay = "Stretchy"
 playback_speed = 2.0
 anims/Stretchy = SubResource( 28 )
 "anims/Trigger Projectile" = SubResource( 34 )
+
+[node name="jump audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+max_distance = 5000.0
+attenuation = 0.225313

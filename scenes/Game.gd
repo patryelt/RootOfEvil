@@ -13,10 +13,15 @@ var _score = 0
 var _stage_score = 0
 var _stage_speed = 0.15
 var stage = 1
+var current_dialogue
+var tutorial1_has_called:bool
+var tutorial2_has_called:bool
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	var dialogic_start = Dialogic.start('start')
+	add_child(dialogic_start)
 	initialize()
 
 func spawn_planet():
@@ -28,7 +33,7 @@ func spawn_planet():
 	new_planet.camera = camera_2d
 	new_planet.planet_sprite = floor(rng.randf() * 8)
 	new_planet.rotation_speed = _stage_speed * random_speed
-	if randf() > 0.5:
+	if stage > 1 and rng.randf() > 0.5:
 		new_planet.direction = -1
 	add_child(new_planet)
 	var random_x_offset = random_offset * _x_planet_space - _x_planet_space / 2;
@@ -84,5 +89,29 @@ func _on_Player_landing_on_planet():
 		_stage_score = 0
 		_stage_speed += 0.05
 		print("STAGE ", stage, "\n Speed is now: ", _stage_speed)
+	trigger_dialogue()
 	spawn_planet()
+	
+func trigger_dialogue():
+	var random_dialogue = rng.randi_range(0, 9)
+	print(random_dialogue)
+	
+	
+	if(is_instance_valid(current_dialogue)):
+		current_dialogue.queue_free()
+	
+	# DIALOGUES
+	if (_score == 1 and !tutorial1_has_called):
+		current_dialogue = Dialogic.start('first_jump')
+		add_child(current_dialogue)
+		tutorial1_has_called = true
+	if (_score == 2 and !tutorial2_has_called):
+		current_dialogue = Dialogic.start('second_jump')
+		add_child(current_dialogue)
+		tutorial2_has_called = true
+		
+	if (_score % 4 == 0):
+		pass
+	
+	
 	

@@ -3,3 +3,5 @@ export.cfg
 export_presets.cfg
 build
 android
+
+project.godot
